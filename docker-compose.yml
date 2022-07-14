@@ -1,0 +1,23 @@
+version: "3.3"
+services:
+  maybank-service-app-container:
+    image: maybank-service-app-api
+    ports:
+      - "8080:8080"
+    networks:
+      - springboot-maybank-docker
+    depends_on:
+      - maybankdb
+ 
+  maybankdb:
+    image: mysql:8
+    networks:
+      - springboot-maybank-docker
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=maybank_db
+      - MYSQL_USER=sa
+      - MYSQL_PASSWORD=password
+
+networks:
+  springboot-maybank-docker:
